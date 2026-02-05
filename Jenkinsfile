@@ -49,6 +49,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 sh '''
+                sed -i "s|DOCKERHUB_USERNAME|${DOCKERHUB_USER}|g" k8s-deployment.yaml
                 sed -i "s|IMAGE_TAG|$TAG|g" k8s-deployment.yaml
                 kubectl apply -f k8s-deployment.yaml
                 '''
