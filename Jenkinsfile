@@ -16,9 +16,12 @@ pipeline {
         stage('Build & Test') {
             steps {
                 sh '''
-                pip3 install -r requirements.txt
+                 python3 -m venv venv
+                . venv/bin/activate
+                pip install --upgrade pip
+                pip install -r requirements.txt
                 pytest
-                '''
+               '''
             }
         }
 
